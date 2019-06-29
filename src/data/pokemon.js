@@ -1,4 +1,4 @@
-export default [
+export const data = [
         {
           pokedex_id: 3,
           name: "venusaur",

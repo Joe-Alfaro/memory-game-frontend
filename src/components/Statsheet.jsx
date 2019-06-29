@@ -21,10 +21,10 @@ const Rules = styled.div`
   }
 `;
 
-const Statsheet = () => {
+const Statsheet = ({playerOnePoints}) => {
   return(
     <StyledStatsheet>
-      <Player playerNumber='1' />
+      <Player playerNumber='1' playerOnePoints={playerOnePoints}/>
       <Rules>
         <h3>Rules:</h3>
         <p>Lorem Ipsum asdfhajsdfhasldkjfl;aksdfj a;sldkjf;askjd fasdfklja sd;lfkj ads;lfkj asdflkjasdlfkj ads</p>

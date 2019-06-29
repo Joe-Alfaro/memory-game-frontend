@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Name = styled.h1`
@@ -21,23 +21,17 @@ const Score = styled.h2`
   font-size: 3rem;
 `;
 
-class Player extends Component {
-  state = {
-    score: 0
-  }
-
-  render() {
+const Player = ({playerOnePoints, playerNumber}) =>  {
     return(
       <div className='playerWrapper'>
         <Name 
-          playerNumber={this.props.playerNumber}
+          playerNumber={playerNumber}
         >
-          Player {this.props.playerNumber}
+          Player {playerNumber}
         </Name>
-        <Score>{this.state.score}</Score>
+        <Score>{playerOnePoints}</Score>
       </div>
     );
   };
-};
 
 export default Player;

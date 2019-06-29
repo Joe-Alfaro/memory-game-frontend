@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PokemonCard = styled.div`
-  background-image: linear-gradient(to bottom right, #86BFBB, #4EB9EA);
+  background-image: linear-gradient(to bottom right, silver, gray);
   border-radius: 15px;
   padding: 5px;
   height: 105px;
@@ -11,6 +11,11 @@ const PokemonCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 5px 5px 5px grey;
+  ${props => !props.faceUp && '.content{display: none};'}
+  ${props => props.found && 'visibility: hidden;'}
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const PokedexId = styled.h2`
@@ -38,13 +43,36 @@ const PokemonImg = styled.img`
   width: auto;
 `;
 
-const Card = props => {
+const Card = ({
+  id, 
+  name, 
+  image, 
+  pokedexId, 
+  faceUp,
+  clickHandler,
+  found
+}) => {
   return (
-        <PokemonCard onClick={props.clickHandler}>
-          <PokemonName>{props.name}</PokemonName>
-          <PokemonImg src={props.image} />
-          <PokedexId>{props.pokedexId.toString().padStart(3, '0')}</PokedexId>
-        </PokemonCard>
+    <PokemonCard 
+      onClick={() => clickHandler(id)} 
+      faceUp={faceUp}
+      found={found}
+    >
+      <PokemonName 
+        className='content'
+      >
+        {name}
+      </PokemonName>
+      <PokemonImg 
+        className='content' 
+        src={image} 
+      />
+      <PokedexId 
+        className='content'
+      >
+        {pokedexId.toString().padStart(3, '0')}
+      </PokedexId>
+    </PokemonCard>
   );
 };
 

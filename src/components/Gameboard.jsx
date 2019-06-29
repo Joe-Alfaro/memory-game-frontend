@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import pokemon from '../data/pokemon';
 import Card from './Card';
 
 
@@ -14,37 +13,33 @@ const StyledGameboard = styled.div`
   margin: 0 auto;
 `;
 
-class Gameboard extends React.Component {
-  state = {
-    pokemon: []
-  }
-  clickHandler = event => {
-      event.preventDefault();
-      console.log("card clicked");
-  }
-  
-  componentDidMount(){
-    const builtDeck = this.props.doubleCards(pokemon);
-    const shuffledDeck = this.props.shuffleCards(builtDeck);
-    this.setState({pokemon: shuffledDeck})
-  }
+const Gameboard = ({
+  cards, 
+  checkForMatch,
+  flipped,
+  found,
+  clickHandler
+}) => {
+  const capitalize = word => (
+    `${word[0].toUpperCase()}${word.slice(1)}`
+  );
 
-  render(){
-    return(
-      <StyledGameboard>
-        {this.state.pokemon.map((pokemon, index) => (
-          <Card
-            key={index}
-            pokedexId={pokemon.pokedex_id}
-            name={this.props.capitalize(pokemon.name)}
-            image={pokemon.imageURL}
-            flipped={false}
-            clickHandler={this.clickHandler}
-          />
-        ))}
-      </StyledGameboard>
-    )
-  }
+  return(
+    <StyledGameboard>
+      {cards.map((card, index) => (
+        <Card
+          key={card.id}
+          id={card.id}
+          pokedexId={card.pokedex_id}
+          name={capitalize(card.name)}
+          image={card.imageURL}
+          clickHandler={clickHandler}
+          faceUp={flipped.includes(card.id)}
+          found={found.includes(card.id)}
+        />
+      ))}
+    </StyledGameboard>
+  )
 };
 
 export default Gameboard;
